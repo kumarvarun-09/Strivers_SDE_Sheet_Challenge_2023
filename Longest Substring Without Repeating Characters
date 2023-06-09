@@ -1,0 +1,21 @@
+#include <bits/stdc++.h> 
+int uniqueSubstrings(string input)
+{
+    //Write your code here
+    int prev = 0, ans = 0;
+    unordered_map<char, int> mp;
+    for(int i = 0; i < input.length(); i++)
+    {
+        if(mp.find(input[i]) == mp.end())
+        {
+            mp[input[i]] = i;
+        }
+        else
+        {
+            prev = max(prev, mp[input[i]] + 1);
+            mp[input[i]] = i;
+        }
+        ans = max(ans, i - prev + 1);
+    }
+    return ans;
+}
